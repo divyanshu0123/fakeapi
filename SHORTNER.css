@@ -1,0 +1,14 @@
+/* Page background and centering */
+body {
+  background-color: #2e2e2e;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Container box */
+.form-box {
+  background-color
