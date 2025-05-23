@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fetch JSONPlaceholder Data</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h2>Fetched TODOs</h2>
+  <table id="todosTable">
+    <thead>
+      <tr>
+        <th>create</th>
+        <th>read</th>
+        <th>update</th>
+        <th>delete</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    // Fetch todos data
+    fetch('https://jsonplaceholder.typicode.com/todos/')
+      .then(response => response.json())
+      .then(todos => {
+        const tbody = document.querySelector('#todosTable tbody');
+
+        // Loop through todos and add rows to the table
+        for (let todo of todos) {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${todo.id}</td>
+            <td>${todo.title}</td>
+            <td>${todo.completed ? 'Yes' : 'No'}</td>
+          `;
+          tbody.appendChild(row);
+        }
+      })
+      .catch(error => console.error('Error fetching todos:', error));
+  </script>
+</body>
+</html>

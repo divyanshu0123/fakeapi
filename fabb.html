@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CRUD with JSONPlaceholder</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    input[type="text"] {
+      width: 300px;
+      padding: 5px;
+      margin: 5px 0;
+    }
+    button {
+      padding: 6px 10px;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>CRUD TODOs</h2>
+
+  <h3>Add New TODO</h3>
+  <input type="text" id="newTodoTitle" placeholder="Enter TODO title">
+  <button onclick="createTodo()">Add</button>
+
+  <table id="todosTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Completed</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const API_URL = 'https://jsonplaceholder.typicode.com/todos';
+    const tbody = document.querySelector('#todosTable tbody');
+
+    // Fetch and display todos
+    function fetchTodos() {
+      fetch(API_URL + '?_limit=10')
+        .then(response => response.json())
+        .then(todos => {
+          tbody.innerHTML = '';
+          todos.forEach(todo => {
+            addRow(todo);
+          });
+        })
+        .catch(error => console.error('Error fetching todos:', error));
+    }
+
+    // Add row to table
+    function addRow(todo) {
+      const row = document.createElement('tr');
+      row.setAttribute('data-id', todo.id);
+
+      row.innerHTML = `
+        <td>${todo.id}</td>
+        <td contenteditable="true">${todo.title}</td>
+        <td><input type="checkbox" ${todo.completed ? 'checked' : ''}></td>
+        <td>
+          <button onclick="updateTodo(${todo.id})">Update</button>
+          <button onclick="deleteTodo(${todo.id})">Delete</button>
+        </td>
+      `;
+      tbody.appendChild(row);
+    }
+
+    // Create new todo
+    function createTodo() {
+      const titleInput = document.getElementById('newTodoTitle');
+      const title = titleInput.value.trim();
+      if (!title) return alert('Please enter a title');
+
+      fetch(API_URL, {
+        method: 'POST',
+        body: JSON.stringify({
+          title,
+          completed: false,
+          userId: 1
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(newTodo => {
+        addRow(newTodo);
+        titleInput.value = '';
+      })
+      .catch(error => console.error('Error creating todo:', error));
+    }
+
+    // Update todo
+    function updateTodo(id) {
+      const row = document.querySelector(`tr[data-id='${id}']`);
+      const title = row.children[1].textContent.trim();
+      const completed = row.children[2].querySelector('input').checked;
+
+      fetch(`${API_URL}/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          title,
+          completed,
+          userId: 1
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(updatedTodo => {
+        alert(`TODO #${id} updated!`);
+      })
+      .catch(error => console.error('Error updating todo:', error));
+    }
+
+    // Delete todo
+    function deleteTodo(id) {
+      if (!confirm(`Are you sure you want to delete TODO #${id}?`)) return;
+
+      fetch(`${API_URL}/${id}`, {
+        method: 'DELETE'
+      })
+      .then(() => {
+        const row = document.querySelector(`tr[data-id='${id}']`);
+        if (row) row.remove();
+        alert(`TODO #${id} deleted.`);
+      })
+      .catch(error => console.error('Error deleting todo:', error));
+    }
+
+    // Load todos on page load
+    fetchTodos();
+  </script>
+</body>
+</html>
