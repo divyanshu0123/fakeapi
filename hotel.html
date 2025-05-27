@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hotel Task Assignment - Deoria</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 30px;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 1000px;
+      background: #fff;
+      margin: auto;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2, h3 {
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    p, li {
+      line-height: 1.6;
+    }
+
+    ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #confirmation {
+      margin-top: 20px;
+      color: green;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
+
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background-color: #f4f6f9;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Assign Task: Hotel Data Collection (Deoria)</h2>
+    <p><strong>Task:</strong></p>
+    <p>Collect the data of hotels in <strong>Deoria</strong> with the following details:</p>
+    <ul>
+      <li>Name</li>
+      <li>Address</li>
+      <li>Mobile Number</li>
+      <li>Website – If available, mention the URL; if not, simply write "No".</li>
+    </ul>
+    <button onclick="assignTask()">Assign Task</button>
+    <div id="confirmation"></div>
+
+    <h3>📋 Hotels in Deoria District</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Mobile Number</th>
+          <th>Website</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Hotel Heaven</td><td>Railway Station Road (West), Near Durga Mandir, Kailashpuri, Deoria</td><td>Not available</td><td>No</td></tr>
+        <tr><td>Hotel Shourya Regency</td><td>Civil Line, Opposite Kansal Petrol Pump, Deoria</td><td>Not available</td><td>No</td></tr>
+        <tr><td>Hotel Celebration</td><td>MEHDA, Gorakhpur Road, Deoria, Uttar Pradesh, 274001</td><td>Not available</td><td>No</td></tr>
+        <tr><td>Hotel Kailash</td><td>C C Road, Near Mahila P G College, Raghav Nagar, Deoria, Uttar Pradesh, 274001</td><td>Not available</td><td>No</td></tr>
+        <tr><td>Hotel Blue Stone</td><td>Near Parmarthi Pokhara, Garulpar New Colony, Deoria, Uttar Pradesh, 274001</td><td>Not available</td><td>No</td></tr>
+        <tr><td>Hotel Singhasan & Restaurant</td><td>Deoria</td><td>Not available</td><td>No</td></tr>
+        <tr><td>Hotel Omni</td><td>Deoria</td><td>Not available</td><td>No</td></tr>
+        <tr><td>Golden Laurel Inn</td><td>11/354, Sant Vinoba Marg, New Colony, City Center, Station Road, Deoria, Uttar Pradesh, 274001</td><td>Not available</td><td>No</td></tr>
+        <tr><td>Hotel Kingdom and Banquet</td><td>Deoria</td><td>Not available</td><td>No</td></tr>
+        <tr><td>Hotel Renuka Inn</td><td>Raghav Nagar, Deoria</td><td>Not available</td><td>No</td></tr>
+        <tr><td>Ashoka Hotel</td><td>Purwa Chauraha, Gorakhpur Road, Deoria</td><td>Not available</td><td>No</td></tr>
+        <tr><td>Sahara Palace</td><td>In front of Durga Mandir, Deoria</td><td>Not available</td><td>No</td></tr>
+        <tr><td>Hotel Umda International</td><td>Railway West Cabin, Deoria</td><td>Not available</td><td>No</td></tr>
+        <tr><td>India Guest House</td><td>Railway Station Road, Deoria</td><td>Not available</td><td>No</td></tr>
+        <tr><td>Hotel O Deoria</td><td>Near Bhathaliya Chouraha, Deoria</td><td>Not available</td><td>No</td></tr>
+        <tr><td>Hotel Golden Tulip Inn City Center</td><td>Station Road, Deoria, Uttar Pradesh, 274001</td><td>Not available</td><td>No</td></tr>
+        <tr><td>Camp Deoriatal</td><td>Deoriatal, Deoria, Uttar Pradesh</td><td>Not available</td><td>No</td></tr>
+        <tr><td>Deoria Bakers</td><td>Saraswati Vidya Mandir Road, Uma Nagar, Deoria, Uttar Pradesh, 274001</td><td>+91-8460401103</td><td>No</td></tr>
+        <tr><td>Hotel in Gauri Bazar</td><td>Ward No 16, House No 346, New Colony, Deoria, Uttar Pradesh, 274001</td><td>+91-8273412447</td><td><a href="https://deoriahotel.in/" target="_blank">https://deoriahotel.in/</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function assignTask() {
+      document.getElementById("confirmation").innerText = "✅ Task has been successfully assigned!";
+    }
+  </script>
+
+</body>
+</html>
